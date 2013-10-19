@@ -4,7 +4,7 @@
 
 <h2>Installing & Upgrading</h2>
 <ol>
-  <li>Download ToolSwap.</li>
+  <li><a href="http://dev.bukkit.org/bukkit-plugins/toolswap/">Download</a> ToolSwap.zip</li>
   <li>Unzip ToolSwap.zip.</li>
   <li>Drag ToolSwap.jar into your "craftbukkit/plugins" folder <em>&ndash; replace ToolSwap.jar when upgrading.</em></li>
 </ol>
