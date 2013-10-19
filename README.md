@@ -52,7 +52,7 @@
 </ul>
 
 <h2>Credits</h2>
-<p>Author: <a href="http://forums.bukkit.org/members/mmonkey.90802399/">mmonkey</a></p>
+<p>Author: silvermmonkey A.K.A. <a href="http://forums.bukkit.org/members/mmonkey.90802399/">mmonkey</a></p>
 <p>Testers: Desaxt01, GrahamCracker4m, HuskerMath and e_dick.</p>
 
 <h2>ChangeLog</h2>
