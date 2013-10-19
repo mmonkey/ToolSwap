@@ -6,5 +6,11 @@
   <li>Unzip ToolSwap.zip</li>
   <li>Drag ToolSwap.jar into your craftbukkit/plugins folder</li>
 </ol>
+<h2>Commands</h2>
+<p>ToolSwap is very simple to use, it is <b>disabled by default.</b></p>
+<ul>
+  <li>/ToolSwap on <em>&ndash; this turns ToolSwap on<em></li>
+  <li>/ToolSwap off <em>&ndash; this turns ToolSwap off<em></li>
+</ul>
 <h2>Swapping</h2>
 <p></p>
