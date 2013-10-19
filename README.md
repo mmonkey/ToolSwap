@@ -4,7 +4,7 @@
 <ol>
   <li>Download ToolSwap.</li>
   <li>Unzip ToolSwap.zip.</li>
-  <li>Drag ToolSwap.jar into your &lquo;craftbukkit/plugins&rquo; folder <em>&ndash; replace ToolSwap.jar when upgrading.</em></li>
+  <li>Drag ToolSwap.jar into your "craftbukkit/plugins" folder <em>&ndash; replace ToolSwap.jar when upgrading.</em></li>
 </ol>
 <h2>Commands</h2>
 <p>ToolSwap is very simple to use, it is <b>disabled by default.</b></p>
