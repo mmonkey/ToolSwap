@@ -65,7 +65,7 @@
   <li>Turn torch swapping on or off</li>
   <li>Allow ToolSwap to swap to sword when a player hits another player.</li>
   <li>Change which blocks/mobs will activate ToolSwap.</li>
-<ul> 
+</ul> 
 
 <h3>Important Notes:</h3>
 <ul>
