@@ -1,0 +1,114 @@
+#
+# ToolSwap Configuration
+#
+# 1. Only use spaces, TABs are not allowed in config.yml
+# 2. For the blocks and Entities, only use the ENUM types:
+#    blocks = http://jd.bukkit.org/dev/apidocs/org/bukkit/Material.html
+#    mobs = http://jd.bukkit.org/dev/apidocs/org/bukkit/entity/EntityType.html
+
+general:
+  on-by-default: false
+  torch-switching: true
+  swap-sword-on-player: false
+
+blocks:
+  axe-blocks:
+    - LOG
+    - WOOD
+    - WOOD_STEP
+    - WOOD_DOUBLE_STEP
+    - WOOD_STAIRS
+    - BIRCH_WOOD_STAIRS
+    - JUNGLE_WOOD_STAIRS
+    - SPRUCE_WOOD_STAIRS
+    - WORKBENCH
+    - LADDER
+    - RAILS
+    - ACTIVATOR_RAIL
+    - DETECTOR_RAIL
+    - POWERED_RAIL
+    - SIGN
+    - SIGN_POST
+    - PUMPKIN
+    - JACK_O_LANTERN
+    - HUGE_MUSHROOM_1
+    - HUGE_MUSHROOM_2
+    - FENCE
+    - FENCE_GATE
+  pickaxe-blocks:
+    - STONE
+    - COBBLESTONE
+    - MOSSY_COBBLESTONE
+    - SANDSTONE
+    - OBSIDIAN
+    - COAL_ORE
+    - IRON_ORE
+    - IRON_BLOCK
+    - LAPIS_ORE
+    - LAPIS_BLOCK
+    - GOLD_ORE
+    - GOLD_BLOCK
+    - REDSTONE_ORE
+    - GLOWING_REDSTONE_ORE
+    - REDSTONE_BLOCK
+    - EMERALD_ORE
+    - EMERALD_BLOCK
+    - DIAMOND_ORE
+    - DIAMOND_BLOCK
+    - STEP
+    - DOUBLE_STEP
+    - COBBLESTONE_STAIRS
+    - COBBLE_WALL
+    - BRICK
+    - BRICK_STAIRS
+    - ICE
+    - NETHERRACK
+    - NETHER_BRICK
+    - NETHER_BRICK_STAIRS
+    - NETHER_FENCE
+    - ANVIL
+    - QUARTZ_ORE
+    - QUARTZ_BLOCK
+    - QUARTZ_STAIRS
+    - CLAY_BRICK
+    - STAINED_CLAY
+    - HARD_CLAY
+    - FURNACE
+    - DISPENSER
+    - BREWING_STAND
+    - CAULDRON
+    - HOPPER
+  shear-blocks:
+    - WOOL
+    - LEAVES
+  shovel-blocks:
+    - GRASS
+    - DIRT
+    - SAND
+    - GRAVEL
+    - SNOW
+    - SNOW_BLOCK
+    - CLAY
+    - SOUL_SAND
+    - MYCEL
+  sword-blocks:
+    - MELON_BLOCK
+    - WEB
+ 
+mobs:
+  enemies:
+    - BLAZE
+    - CAVE_SPIDER
+    - CREEPER
+    - ENDER_DRAGON
+    - ENDERMAN
+    - GHAST
+    - IRON_GOLEM
+    - MAGMA_CUBE
+    - PIG_ZOMBIE
+    - SILVERFISH
+    - SKELETON
+    - SLIME
+    - SPIDER
+    - WITCH
+    - ZOMBIE

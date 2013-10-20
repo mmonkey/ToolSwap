@@ -17,4 +17,7 @@ public class ToolSwapPlayer {
 	public boolean getSwap(){
 		return this.swap;
 	}
+	public Player getPlayer(){
+		return this.player;
+	}
 }

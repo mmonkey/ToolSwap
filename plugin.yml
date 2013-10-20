@@ -4,4 +4,29 @@ version: 1.1
 commands:
    toolswap:
       description: Automatically switch tools, from your inventory, to your hand depending on what you are mining/fighting. If you have torches in your inventory, and a pickaxe or shovel in hand, right click to automatically switch to torches.
-      usage: /toolswap [on/off]
+      usage: /toolswap [on/off], /toolswap [player] [on/off]
+permissions:
+   toolswap.*:
+      description: Gives access to all ToolSwap commands / functions
+      children:
+         toolswap.use: true
+         toolswap.on: true
+         toolswap.off: true
+         toolswap.player.on: true
+         toolswap.player.off: true
+      default: op
+   toolswap.use:
+      description: Allows player to use ToolSwap
+      default: true
+   toolswap.on:
+      description: Allows player to turn ToolSwap on
+      default: op
+   toolswap.off:
+      description: Allows player to turn ToolSwap off
+      default: op
+   toolswap.player.on:
+      description: Allows player to turn on ToolSwap for a specified player
+      default: op
+   toolswap.player.off:
+      description: Allows player to turn off ToolSwap for a specified player
+      default: op

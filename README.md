@@ -1,6 +1,6 @@
 <h1>ToolSwap</h1>
 <p>A Bukkit plugin that automatically switches the tool in a players hand depending on what block/entity that player interacts with. See <a href="https://github.com/mmonkey/ToolSwap/tree/master#swapping">Swapping</a> for details on tool swapping.</p>
-<p>Version: v1.0</p>
+<p>Version: v1.1</p>
 
 <h2>Installing & Upgrading</h2>
 <ol>
@@ -11,11 +11,22 @@
 </ol>
 
 <h2>Commands</h2>
-<p>ToolSwap is very simple to use, in fact there is only one command!</p>
+<p>ToolSwap is very simple to use, in fact there are only two commands!</p>
 <ul>
   <li><b>/ToolSwap [on/off]</b> <em>&ndash; this turns ToolSwap on or off.<em></li>
+  <li><b>/ToolSwap [player] [on/off]</b> <em>&ndash; this turns ToolSwap on or off for a specific player.<em></li>
 </ul>
 <p>Please note that ToolSwap is <b>disabled by default.</b></p>
+
+<h2>Permissions</h2>
+<ul>
+  <li><b>toolswap.* &ndash;</b></li>
+  <li><b>toolswap.use &ndash;</b> ToolSwap may be used by this player. <em>Note: ToolSwap must be turned on first (either by using a command or by enabling "on-by-default" in config.yml).</em></li>
+  <li><b>toolswap.on &ndash;</b> enables use of "/toolswap on" command.</li>
+  <li><b>toolswap.off &ndash;</b> enables use of "/toolswap off" command.</li>
+  <li><b>toolswap.player.on &ndash;</b> enables use of "/toolswap [player] on" command.</li>
+  <li><b>toolswap.player.off &ndash;</b> enables use of "/toolswap [player] off" command.</li>
+</ul>
 
 <h2>Swapping</h2>
 
@@ -47,9 +58,7 @@
 
 <h2>Future Releases</h2>
 <ul>
-  <li>Add Permissions</li>
-  <li>Configurable Preferences &ndash; set which tools to use on which blocks.</li>
-  <li>Per-player Preferences &ndash; player's can set the tool in-hand as the preferred tool to switch to, when mining specific ores/blocks.</li>
+   <li>Per-player Preferences &ndash; player's can set the tool in-hand as the preferred tool to switch to, when mining specific ores/blocks.</li>
 </ul>
 
 <h2>Credits</h2>
@@ -58,5 +67,6 @@ Testers: Desaxt01, GrahamCracker4m, HuskerMath and e_dick.</p>
 
 <h2>ChangeLog</h2>
 <ul>
+  <li>v1.1 <em>&mdash; Added more commands, added permissions, added config.</em></li>
   <li>v1.0 <em>&mdash; Initial release.</em></li>
 </ul>
