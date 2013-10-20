@@ -20,7 +20,7 @@
 
 <h2>Permissions</h2>
 <ul>
-  <li><b>toolswap.* &ndash;</b></li>
+  <li><b>toolswap.* &ndash;</b> enables all permissions.</li>
   <li><b>toolswap.use &ndash;</b> ToolSwap may be used by this player. <em>Note: ToolSwap must be turned on first (either by using a command or by enabling "on-by-default" in config.yml).</em></li>
   <li><b>toolswap.on &ndash;</b> enables use of "/toolswap on" command.</li>
   <li><b>toolswap.off &ndash;</b> enables use of "/toolswap off" command.</li>
