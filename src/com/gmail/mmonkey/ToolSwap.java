@@ -16,7 +16,7 @@ public class ToolSwap extends JavaPlugin{
 	public HashMap<Player, ToolSwapPlayer> swapList = new HashMap<Player, ToolSwapPlayer>();
 	public boolean enable = false;
 	public boolean onPlayer = false;
-	public boolean torchSwitching = false;
+	public boolean torchSwapping = false;
 	
 	public final Material[] axes = {Material.WOOD_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLD_AXE, Material.DIAMOND_AXE};
 	public final Material[] pickaxes = {Material.WOOD_PICKAXE, Material.STONE_PICKAXE, Material.IRON_PICKAXE, Material.GOLD_PICKAXE, Material.DIAMOND_PICKAXE};
@@ -63,7 +63,7 @@ public class ToolSwap extends JavaPlugin{
 		this.saveDefaultConfig();
 		
 		this.enable = this.getConfig().getBoolean("general.on-by-default");
-		this.torchSwitching = this.getConfig().getBoolean("general.torch-switching");
+		this.torchSwapping = this.getConfig().getBoolean("general.torch-swapping");
 		this.onPlayer = this.getConfig().getBoolean("general.swap-sword-on-player");
 		
 		List<String> loadAxeBlocks = ToolSwap.this.getConfig().getStringList("blocks.axe-blocks");

@@ -9,6 +9,7 @@
   <li>Drag ToolSwap.jar into your "craftbukkit/plugins" folder <em>&ndash; replace ToolSwap.jar when upgrading.</em></li>
   <li>Reload the craftbukkit server.</li>
 </ol>
+<p>NOTE: If you made changes to the "config.yml" file, your changes will NOT be lost.</p>
 
 <h2>Commands</h2>
 <p>ToolSwap is very simple to use, in fact there are only two commands!</p>
@@ -54,6 +55,25 @@
   <li>When a player has a bow in-hand, and that player clicks on a block that can be mined, ToolSwap <b>will not</b> swap to the correct tool for mining. However, if the player has a bow in-hand, and that player clicks on an enemy mob, ToolSwap <b>will</b> swap to the first sword in that player's inventory.</li>
   <li>If ToolSwap swaps an item in a player's "HotBar," instead of swapping the items in the bar, ToolSwap will change the selected slot of the correct item. This makes players that are particular about their "HotBar" inventory quite happy.</li>
   <li>Some ores/blocks require a certain level of pickaxe to mine, ToolSwap will only swap to the required level (or higher) pickaxe needed to mine that ore/block.</li>
+</ul>
+
+<h2>Configuration</h2>
+<p>ToolSwap may be configured from the default settings.</p>
+<h3>You Can:</h3>
+<ul>
+  <li>Turn ToolSwap on or off by default</li>
+  <li>Turn torch swapping on or off</li>
+  <li>Allow ToolSwap to swap to sword when a player hits another player.</li>
+  <li>Change which blocks/mobs will activate ToolSwap.</li>
+<ul> 
+
+<h3>Important Notes:</h3>
+<ul>
+  <li>Navigate to the "config.yml" file in the "craftbukkit/plugins/ToolSwap" folder. If the file or folder is not present, reload the craftbukkit server.</li>
+  <li>Only use space characters in the config.yml file. Tabs will break it!</li>
+  <li><b>Blocks must be specified by their material name.</b> These values can be found <a href="http://jd.bukkit.org/dev/apidocs/org/bukkit/Material.html" target="_blank">here.</a></li>
+  <li><b>Mobs must be specified by their entity type.</b> These values can be found <a href="http://jd.bukkit.org/dev/apidocs/org/bukkit/entity/EntityType.html" target="_blank">here.</a></li>
+  <li>Craftbukkit must be reloaded before any changes to the config.yml file can take place.</li>
 </ul>
 
 <h2>Future Releases</h2>

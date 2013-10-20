@@ -195,7 +195,7 @@ public class UseTool implements Listener {
 					
 					ToolSwapPlayer p = plugin.swapList.get(player);
 					
-					if(p.getSwap() && plugin.torchSwitching){
+					if(p.getSwap() && plugin.torchSwapping){
 					
 						ItemStack itemInHand = player.getItemInHand();
 						Block clickedBlock = event.getClickedBlock();

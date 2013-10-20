@@ -8,7 +8,7 @@
 
 general:
   on-by-default: false
-  torch-switching: true
+  torch-swapping: true
   swap-sword-on-player: false
 
 blocks:
