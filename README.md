@@ -14,8 +14,8 @@
 <h2>Commands</h2>
 <p>ToolSwap is very simple to use, in fact there are only two commands!</p>
 <ul>
-  <li><b>/ToolSwap [on/off]</b> <em>&ndash; this turns ToolSwap on or off.<em></li>
-  <li><b>/ToolSwap [player] [on/off]</b> <em>&ndash; this turns ToolSwap on or off for a specific player.<em></li>
+  <li><b>/toolswap [on/off]</b> <em>&ndash; this turns ToolSwap on or off.<em></li>
+  <li><b>/toolswap [player] [on/off]</b> <em>&ndash; this turns ToolSwap on or off for a specific player.<em></li>
 </ul>
 <p>Please note that ToolSwap is <b>disabled by default.</b></p>
 

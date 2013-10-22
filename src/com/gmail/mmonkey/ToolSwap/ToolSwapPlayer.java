@@ -1,4 +1,4 @@
-package com.gmail.mmonkey;
+package com.gmail.mmonkey.ToolSwap;
 
 import org.bukkit.entity.Player;
 
