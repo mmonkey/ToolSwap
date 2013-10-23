@@ -106,6 +106,6 @@ public class ToolSwap extends JavaPlugin{
 	}
 	
     public void onDisable() {
-    	getLogger().info("Tool Swap has been Disabled.");
+    	getLogger().info("ToolSwap has been Disabled.");
     }
 }
