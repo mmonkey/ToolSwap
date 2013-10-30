@@ -2,6 +2,7 @@ package com.gmail.mmonkey.ToolSwap;
 
 import java.util.Arrays;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -30,206 +31,212 @@ public class UseTool implements Listener {
 			Player player = event.getPlayer();
 			
 			if(player.hasPermission("toolswap.use")) {
+				
+				if(player.getGameMode() != GameMode.CREATIVE) {
 			
-				if(plugin.swapList.containsKey(player)) {
-					
-					ToolSwapPlayer p = plugin.swapList.get(player);
-					
-					if(p.getSwap()){
+					if(plugin.swapList.containsKey(player)) {
 						
-						ItemStack itemInHand = player.getItemInHand();
-						Block clickedBlock = event.getClickedBlock();
-						Inventory playerInventory = player.getInventory();
+						ToolSwapPlayer p = plugin.swapList.get(player);
 						
-						if(!isBow(itemInHand.getType())) {
-						
-							if(isAxeBlock(clickedBlock.getType()) && (!isAxe(itemInHand.getType()))) {
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.axes.length; i++) {
-									if(playerInventory.contains(plugin.axes[i])) {
-										temp = playerInventory.first(plugin.axes[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
-										}
-									}
-								}
-								if(min != -1) {
-									swapItem(player, min);
-								}
-								return;
-							}
-							if(isPickaxeBlock(clickedBlock.getType()) && (!isPickaxe(itemInHand.getType()))) {
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.pickaxes.length; i++) {
-									if(playerInventory.contains(plugin.pickaxes[i])) {
-										temp = playerInventory.first(plugin.pickaxes[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
-										}
-									}
-								}
-								if(min != -1) {
-									swapItem(player, min);
-								}
-								return;
-							}
-						
-							if(isStoneOrBetterBlock(clickedBlock.getType()) && (!isStoneOrBetter(itemInHand.getType()))) {
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.stoneOrBetter.length; i++) {
-									if(playerInventory.contains(plugin.stoneOrBetter[i])) {
-										temp = playerInventory.first(plugin.stoneOrBetter[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
-										}
-									}
-								}
-								if(min != -1) {
-									swapItem(player, min);
-								}
-								return;
-							}
+						if(p.getSwap()){
 							
-							if(isIronOrBetterBlock(clickedBlock.getType()) && (!isIronOrBetter(itemInHand.getType()))){
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.ironOrBetter.length; i++) {
-									if(playerInventory.contains(plugin.ironOrBetter[i])) {
-										temp = playerInventory.first(plugin.ironOrBetter[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
-										}
-									}
-								}
-								if(min != -1) {
-									swapItem(player, min);
-								}
-								return;
-							}
+							ItemStack itemInHand = player.getItemInHand();
+							Block clickedBlock = event.getClickedBlock();
+							Inventory playerInventory = player.getInventory();
 							
-							if(isDiamondOrBetterBlock(clickedBlock.getType()) && (!isDiamondOrBetter(itemInHand.getType()))){
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.diamondOrBetter.length; i++) {
-									if(playerInventory.contains(plugin.diamondOrBetter[i])) {
-										temp = playerInventory.first(plugin.diamondOrBetter[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
-										}
-									}
-								}
-								if(min != -1) {
-									swapItem(player, min);
-								}
-								return;
-							}
+							if(!isBow(itemInHand.getType())) {
 							
-							if(isShearBlock(clickedBlock.getType()) && (!isShears(itemInHand.getType()))) {
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.shears.length; i++){
-									if(playerInventory.contains(plugin.shears[i])){
-										temp = playerInventory.first(plugin.shears[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
+								if(isAxeBlock(clickedBlock.getType()) && (!isAxe(itemInHand.getType()))) {
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.axes.length; i++) {
+										if(playerInventory.contains(plugin.axes[i])) {
+											temp = playerInventory.first(plugin.axes[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
 										}
 									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
 								}
-								if(min != -1) {
-									swapItem(player, min);
+								if(isPickaxeBlock(clickedBlock.getType()) && (!isPickaxe(itemInHand.getType()))) {
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.pickaxes.length; i++) {
+										if(playerInventory.contains(plugin.pickaxes[i])) {
+											temp = playerInventory.first(plugin.pickaxes[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
+										}
+									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
 								}
-								return;
-							}
 							
-							if(isShovelBlock(clickedBlock.getType()) && (!isShovel(itemInHand.getType()))) {
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.shovels.length; i++) {
-									if(playerInventory.contains(plugin.shovels[i])) {
-										temp = playerInventory.first(plugin.shovels[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
+								if(isStoneOrBetterBlock(clickedBlock.getType()) && (!isStoneOrBetter(itemInHand.getType()))) {
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.stoneOrBetter.length; i++) {
+										if(playerInventory.contains(plugin.stoneOrBetter[i])) {
+											temp = playerInventory.first(plugin.stoneOrBetter[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
 										}
 									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
 								}
-								if(min != -1) {
-									swapItem(player, min);
-								}
-								return;
-							}
-							
-							if(isSwordBlock(clickedBlock.getType()) && (!isSword(itemInHand.getType()))) {
-								int min = -1;
-								int temp = -1;
-								for(int i = 0; i < plugin.swords.length; i++) {
-									if(playerInventory.contains(plugin.swords[i])) {
-										temp = playerInventory.first(plugin.swords[i]);
-										if(min == -1 || temp < min) {
-											min = temp;
+								
+								if(isIronOrBetterBlock(clickedBlock.getType()) && (!isIronOrBetter(itemInHand.getType()))){
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.ironOrBetter.length; i++) {
+										if(playerInventory.contains(plugin.ironOrBetter[i])) {
+											temp = playerInventory.first(plugin.ironOrBetter[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
 										}
 									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
 								}
-								if(min != -1) {
-									swapItem(player, min);
+								
+								if(isDiamondOrBetterBlock(clickedBlock.getType()) && (!isDiamondOrBetter(itemInHand.getType()))){
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.diamondOrBetter.length; i++) {
+										if(playerInventory.contains(plugin.diamondOrBetter[i])) {
+											temp = playerInventory.first(plugin.diamondOrBetter[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
+										}
+									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
 								}
-								return;
+								
+								if(isShearBlock(clickedBlock.getType()) && (!isShears(itemInHand.getType()))) {
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.shears.length; i++){
+										if(playerInventory.contains(plugin.shears[i])){
+											temp = playerInventory.first(plugin.shears[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
+										}
+									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
+								}
+								
+								if(isShovelBlock(clickedBlock.getType()) && (!isShovel(itemInHand.getType()))) {
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.shovels.length; i++) {
+										if(playerInventory.contains(plugin.shovels[i])) {
+											temp = playerInventory.first(plugin.shovels[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
+										}
+									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
+								}
+								
+								if(isSwordBlock(clickedBlock.getType()) && (!isSword(itemInHand.getType()))) {
+									int min = -1;
+									int temp = -1;
+									for(int i = 0; i < plugin.swords.length; i++) {
+										if(playerInventory.contains(plugin.swords[i])) {
+											temp = playerInventory.first(plugin.swords[i]);
+											if(min == -1 || temp < min) {
+												min = temp;
+											}
+										}
+									}
+									if(min != -1) {
+										swapItem(player, min);
+									}
+									return;
+								}
 							}
 						}
-					}
-				} else {
-					plugin.swapList.put(player, new ToolSwapPlayer(player, plugin.enable));
-				}
-			}
-		}
+					} else {
+						plugin.swapList.put(player, new ToolSwapPlayer(player, plugin.enable));
+					} //swapList check
+				} //Game mode check
+			} //Permission check
+		} //Action check
 
 		if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			
 			final Player player = event.getPlayer();
 			
 			if(player.hasPermission("toolswap.use")) {
+				
+				if(player.getGameMode() != GameMode.CREATIVE) {
 			
-				if(plugin.swapList.containsKey(player)) {
-					
-					ToolSwapPlayer p = plugin.swapList.get(player);
-					
-					if(p.getSwap() && plugin.torchSwapping){
-					
-						ItemStack itemInHand = player.getItemInHand();
-						Block clickedBlock = event.getClickedBlock();
-						final Inventory playerInventory = player.getInventory();
-							
-						if(isTorchBlock(clickedBlock.getType()) && (isPickaxe(itemInHand.getType()))) {
-							if(playerInventory.contains(plugin.torch)) {
-								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
-									public void run() {
-										swapItem(player, playerInventory.first(plugin.torch));
-									}
-								}, 1L); //delays the swap by 1 tick
+					if(plugin.swapList.containsKey(player)) {
+						
+						ToolSwapPlayer p = plugin.swapList.get(player);
+						
+						if(p.getSwap() && plugin.torchSwapping){
+						
+							ItemStack itemInHand = player.getItemInHand();
+							Block clickedBlock = event.getClickedBlock();
+							final Inventory playerInventory = player.getInventory();
+								
+							if(isTorchBlock(clickedBlock.getType()) && (isPickaxe(itemInHand.getType()))) {
+								if(playerInventory.contains(plugin.torch)) {
+									this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+										public void run() {
+											swapItem(player, playerInventory.first(plugin.torch));
+										}
+									}, 1L); //delays the swap by 1 tick
+									return;
+								}
 								return;
 							}
-							return;
-						}
-						if(isTorchBlock(clickedBlock.getType()) && (isShovel(itemInHand.getType()))) {
-							if(playerInventory.contains(plugin.torch)) {
-								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
-									public void run() {
-										swapItem(player, playerInventory.first(plugin.torch));
-									}
-								}, 1L); //delays the swap by 1 tick
+							if(isTorchBlock(clickedBlock.getType()) && (isShovel(itemInHand.getType()))) {
+								if(playerInventory.contains(plugin.torch)) {
+									this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new Runnable() {
+										public void run() {
+											swapItem(player, playerInventory.first(plugin.torch));
+										}
+									}, 1L); //delays the swap by 1 tick
+									return;
+								}
 								return;
 							}
-							return;
 						}
-					}
-				} else {
-					plugin.swapList.put(player, new ToolSwapPlayer(player, plugin.enable));
-				}
-			}
-		}
-	}
+					} else {
+						plugin.swapList.put(player, new ToolSwapPlayer(player, plugin.enable));
+					} //swapList check
+				} //Game mode check
+			} //Permission check
+		} //Action check
+	} //Event
 	
 	@EventHandler
 	public void onMobHit(EntityDamageByEntityEvent event){
