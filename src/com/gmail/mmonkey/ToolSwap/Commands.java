@@ -28,12 +28,12 @@ public class Commands implements CommandExecutor{
 		}
 		
 		//Add player to swapList if not already
-		if(!plugin.swapList.containsKey(player)) {
-			plugin.swapList.put(player, new ToolSwapPlayer(player, plugin.enable));
+		if(!plugin.swapList.containsKey(player.getName())) {
+			plugin.swapList.put(player.getName(), new ToolSwapPlayer(player.getName(), plugin.enable));
 		}
 		
 		//Pull player out of swapList
-		ToolSwapPlayer p = plugin.swapList.get(player);
+		ToolSwapPlayer p = plugin.swapList.get(player.getName());
 		
 		//If command has no arguments, show whether ToolSwap is enabled or disabled.
 		if(args.length == 0) {
@@ -45,7 +45,7 @@ public class Commands implements CommandExecutor{
 				player.sendMessage(ChatColor.RED + "ToolSwap is disabled.");
 			}
 			
-		//Turn ToolSwap on or off
+		//Turn ToolSwap on
 		} else if(args.length == 1) {
 			
 			if(args[0].equalsIgnoreCase("on")) {
@@ -63,7 +63,8 @@ public class Commands implements CommandExecutor{
 					p.setSwap(true);
 					player.sendMessage(ChatColor.GREEN + "ToolSwap is enabled.");
 				}
-				
+			
+			//Turn ToolSwap off	
 			} else if(args[0].equalsIgnoreCase("off")) {
 				
 				//Check to see if player has permission
@@ -77,17 +78,85 @@ public class Commands implements CommandExecutor{
 					
 				} else {
 					p.setSwap(false);
+					p.setListening(false);
 					player.sendMessage(ChatColor.RED + "ToolSwap is now disabled.");
+				}
+			
+			//turn ToolSwap's listening-mode on
+			} else if(args[0].equalsIgnoreCase("set")) {
+				
+				//Check to see if player has permission
+				if(!player.hasPermission("Toolswap.pref")) {
+					player.sendMessage(ChatColor.RED + "You don't have permission.");
+					return true;
+				}
+				
+				if(p.getListening()) {
+					player.sendMessage(ChatColor.RED + "ToolSwap is already in listening-mode.");
+					
+				} else {
+					p.setListening(true);
+					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Listening-Mode enabled.");
+					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " To stop listening use command:" + ChatColor.WHITE + " /toolswap cancel");
+				}
+			
+			//cancel ToolSwap's listening-mode
+			} else if(args[0].equalsIgnoreCase("cancel")) {
+				
+				//Check to see if player has permission
+				if(!player.hasPermission("Toolswap.pref")) {
+					player.sendMessage(ChatColor.RED + "You don't have permission.");
+					return true;
+				}
+				
+				if(!p.getListening()) {
+					player.sendMessage(ChatColor.RED + "ToolSwap is not in Listening-Mode, there is nothing to cancel.");
+				
+				} else {
+					p.setListening(false);
+					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Listening-Mode disabled.");
+				}
+			
+			//list tool preferences for sender	
+			} else if(args[0].equalsIgnoreCase("list")) {
+			
+				//Check to see if player has permission
+				if(!player.hasPermission("Toolswap.pref")) {
+					player.sendMessage(ChatColor.RED + "You don't have permission.");
+					return true;
+				}
+				
+				player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Your preferred tools:");
+				
+				for(int i = 0; i < p.preferenceListToString().size(); i++) {
+					player.sendMessage(p.preferenceListToString().get(i));
 				}
 				
 			} else {
 				player.sendMessage("Command is not understood.");
 			}
 			
-		//Turn ToolSwap on or off for specified player	
 		} else if(args.length == 2){
 			
-			if(args[1].equalsIgnoreCase("on")) {
+			//Delete tool preference
+			if(args[0].equalsIgnoreCase("del") || args[0].equalsIgnoreCase("delete")) {
+				
+				//Check to see if player has permission
+				if(!player.hasPermission("Toolswap.pref")) {
+					player.sendMessage(ChatColor.RED + "You don't have permission.");
+					return true;
+				}
+				
+				if(Integer.parseInt(args[1]) > 0) {
+					p.removeListItem(Integer.parseInt(args[1]));
+					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Preference " + args[1] + " has been deleted.");
+				
+				} else {
+					player.sendMessage(ChatColor.RED + "Command not understood." + ChatColor.YELLOW + " Usage:" + ChatColor.WHITE + " /toolswap [del/delete] [number]");
+				}
+				
+			//Turn ToolSwap on for specified player	
+			} else if(args[1].equalsIgnoreCase("on")) {
 				
 				//Check to see if player has permission
 				if(!player.hasPermission("toolswap.player.on")) {
@@ -102,12 +171,12 @@ public class Commands implements CommandExecutor{
 					if(player2.hasPermission("toolswap.use")) {
 						
 						//Add player to swapList if not already
-						if(!plugin.swapList.containsKey(player2)) {
-							plugin.swapList.put(player2, new ToolSwapPlayer(player2, plugin.enable));
+						if(!plugin.swapList.containsKey(player2.getName())) {
+							plugin.swapList.put(player2.getName(), new ToolSwapPlayer(player2.getName(), plugin.enable));
 						}
 						
 						//Pull player out of swapList
-						ToolSwapPlayer p2 = plugin.swapList.get(player2);
+						ToolSwapPlayer p2 = plugin.swapList.get(player2.getName());
 						
 						if(p2.getSwap()){
 							player.sendMessage(ChatColor.YELLOW + "ToolSwap is already enabled for " + args[0] + ".");
@@ -125,11 +194,12 @@ public class Commands implements CommandExecutor{
 				} else {
 					player.sendMessage("Player " + args[0] + " not found.");
 				} //Player2 null check
-				
+			
+			//Turn ToolSwap off for specified player	
 			} else if(args[1].equalsIgnoreCase("off")) {
 				
 				//Check to see if player has permission
-				if(!p.getPlayer().hasPermission("toolswap.player.off")) {
+				if(!player.hasPermission("toolswap.player.off")) {
 					player.sendMessage(ChatColor.RED + "You don't have permission.");
 					return true;
 				}
@@ -141,18 +211,19 @@ public class Commands implements CommandExecutor{
 					if(player2.hasPermission("toolswap.use")) {
 						
 						//Add player to swapList if not already
-						if(!plugin.swapList.containsKey(player2)) {
-							plugin.swapList.put(player2, new ToolSwapPlayer(player2, plugin.enable));
+						if(!plugin.swapList.containsKey(player2.getName())) {
+							plugin.swapList.put(player2.getName(), new ToolSwapPlayer(player2.getName(), plugin.enable));
 						}
 						
 						//Pull player out of swapList
-						ToolSwapPlayer p2 = plugin.swapList.get(player2);
+						ToolSwapPlayer p2 = plugin.swapList.get(player2.getName());
 						
 						if(!p2.getSwap()){
 							player.sendMessage(ChatColor.YELLOW + "ToolSwap is already disabled for " + args[0] + ".");
 							
 						} else {
 							p2.setSwap(false);
+							p2.setListening(false);
 							player.sendMessage(ChatColor.GREEN + "ToolSwap has been disabled for " + args[0] + ".");
 							player2.sendMessage(ChatColor.GREEN + "ToolSwap has been disabled by " + player.getDisplayName() + ".");
 						}
@@ -164,6 +235,10 @@ public class Commands implements CommandExecutor{
 				} else {
 					player.sendMessage("Player " + args[0] + " not found.");
 				} //Player2 null check
+				
+				
+			} else {
+				player.sendMessage(ChatColor.RED + "Command not understood.");
 			}
 		}
 		return true;

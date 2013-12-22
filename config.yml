@@ -21,6 +21,8 @@ blocks:
     - BIRCH_WOOD_STAIRS
     - JUNGLE_WOOD_STAIRS
     - SPRUCE_WOOD_STAIRS
+    - ACACIA_STAIRS
+    - DARK_OAK_STAIRS
     - WORKBENCH
     - LADDER
     - RAILS
@@ -62,6 +64,7 @@ blocks:
     - BRICK
     - BRICK_STAIRS
     - ICE
+    - PACKED_ICE
     - NETHERRACK
     - NETHER_BRICK
     - NETHER_BRICK_STAIRS

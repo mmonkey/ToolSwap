@@ -1,10 +1,10 @@
 name: ToolSwap
 main: com.gmail.mmonkey.ToolSwap.ToolSwap
-version: 1.1.1
+version: 1.3
 commands:
    toolswap:
       description: Automatically switch tools, from your inventory, to your hand depending on what you are mining/fighting. If you have torches in your inventory, and a pickaxe or shovel in hand, right click to automatically switch to torches.
-      usage: /toolswap [on/off], /toolswap [player] [on/off]
+      usage: /toolswap [on/off/set/cancel/list], /toolswap [player] [on/off], /toolswap [del/delete] [number]
 permissions:
    toolswap.*:
       description: Gives access to all ToolSwap commands / functions
@@ -12,6 +12,7 @@ permissions:
          toolswap.use: true
          toolswap.on: true
          toolswap.off: true
+         toolswap.pref: true
          toolswap.player.on: true
          toolswap.player.off: true
       default: op
@@ -20,6 +21,9 @@ permissions:
       default: true
    toolswap.on:
       description: Allows player to turn ToolSwap on
+      default: op
+   toolswap.pref:
+      description: Allows player to set ToolSwap to listening-mode
       default: op
    toolswap.off:
       description: Allows player to turn ToolSwap off
