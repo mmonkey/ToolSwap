@@ -1,5 +1,6 @@
 package com.gmail.mmonkey.ToolSwap;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ToolSwap extends JavaPlugin{
 	
-	public static Logger log = Logger.getLogger("Minecraft");
+	private static Logger log = Logger.getLogger("Minecraft");
 	
 	//List of ToolSwapPlayers
 	public HashMap<String, ToolSwapPlayer> swapList = new HashMap<String, ToolSwapPlayer>();
@@ -65,14 +66,17 @@ public class ToolSwap extends JavaPlugin{
 	
 	public void onEnable() {
 		
+		//Start time
 		long start = System.currentTimeMillis();
 		
+		//Load config and saves
 		load();
 		
-		getLogger().info("ToolSwap has been Enabled!");
+		//Register events and commands
         getServer().getPluginManager().registerEvents(new UseTool(this), this);
         getCommand("toolswap").setExecutor(new Commands(this));
         
+        //Loaded in:
         log.info("[ToolSwap] By mmonkey loaded in " + (System.currentTimeMillis() - start) / 1000.0D + " seconds.");
     }
     
@@ -128,14 +132,14 @@ public class ToolSwap extends JavaPlugin{
 		
 		//Import players who have preferences
 		try{
-			players = SaveLoad.load("plugins\\ToolSwap\\players.bin");
+			players = SaveLoad.load(getDataFolder().getPath() + File.separator + "players.bin");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		//Import preferences
 		try{
-			playerToolPrefs = SaveLoad.load("plugins\\ToolSwap\\prefs.bin");
+			playerToolPrefs = SaveLoad.load(getDataFolder().getPath() + File.separator + "prefs.bin");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -187,29 +191,27 @@ public class ToolSwap extends JavaPlugin{
 	} //end load()
 	
 	public void unload() {
+		
 		//Save players to file
-		if(!players.isEmpty()) {
-			try{
-				SaveLoad.save(players, "plugins\\ToolSwap\\players.bin");
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+		try{
+			SaveLoad.save(players, getDataFolder().getPath() + File.separator + "players.bin");
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		
 		//Save preferences to file
-		if(!playerToolPrefs.isEmpty()) {
-			try{
-				SaveLoad.save(playerToolPrefs, "plugins\\ToolSwap\\prefs.bin");
-			}catch(Exception e){
-				e.printStackTrace();
-			}
+		try{
+			SaveLoad.save(playerToolPrefs, getDataFolder().getPath() + File.separator + "prefs.bin");
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-	}
+		
+	} //end unload()
 	
     public void onDisable() {
     	savePrefs();
     	unload();
-    	getLogger().info("ToolSwap has been Disabled.");
+    	log.info("ToolSwap has been Disabled.");
     }
     
     public void savePrefs() {

@@ -40,9 +40,11 @@ public class Commands implements CommandExecutor{
 			
 			if(p.getSwap()) {
 				player.sendMessage(ChatColor.GREEN + "ToolSwap is enabled.");
+				return true;
 				
 			} else {
 				player.sendMessage(ChatColor.RED + "ToolSwap is disabled.");
+				return true;
 			}
 			
 		//Turn ToolSwap on
@@ -58,10 +60,12 @@ public class Commands implements CommandExecutor{
 				
 				if(p.getSwap()){
 					player.sendMessage(ChatColor.YELLOW + "ToolSwap is already enabled.");
+					return true;
 					
 				} else {
 					p.setSwap(true);
 					player.sendMessage(ChatColor.GREEN + "ToolSwap is enabled.");
+					return true;
 				}
 			
 			//Turn ToolSwap off	
@@ -75,11 +79,13 @@ public class Commands implements CommandExecutor{
 				
 				if(!p.getSwap()) {
 					player.sendMessage(ChatColor.YELLOW + "ToolSwap is already disabled.");
+					return true;
 					
 				} else {
 					p.setSwap(false);
 					p.setListening(false);
 					player.sendMessage(ChatColor.RED + "ToolSwap is now disabled.");
+					return true;
 				}
 			
 			//turn ToolSwap's listening-mode on
@@ -93,11 +99,13 @@ public class Commands implements CommandExecutor{
 				
 				if(p.getListening()) {
 					player.sendMessage(ChatColor.RED + "ToolSwap is already in listening-mode.");
+					return true;
 					
 				} else {
 					p.setListening(true);
 					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Listening-Mode enabled.");
 					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " To stop listening use command:" + ChatColor.WHITE + " /toolswap cancel");
+					return true;
 				}
 			
 			//cancel ToolSwap's listening-mode
@@ -111,10 +119,12 @@ public class Commands implements CommandExecutor{
 				
 				if(!p.getListening()) {
 					player.sendMessage(ChatColor.RED + "ToolSwap is not in Listening-Mode, there is nothing to cancel.");
+					return true;
 				
 				} else {
 					p.setListening(false);
 					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Listening-Mode disabled.");
+					return true;
 				}
 			
 			//list tool preferences for sender	
@@ -132,8 +142,12 @@ public class Commands implements CommandExecutor{
 					player.sendMessage(p.preferenceListToString().get(i));
 				}
 				
+				return true;
+			
+			//Command not understood (invalid arguments)	
 			} else {
 				player.sendMessage("Command is not understood.");
+				return false;
 			}
 			
 		} else if(args.length == 2){
@@ -146,13 +160,13 @@ public class Commands implements CommandExecutor{
 					player.sendMessage(ChatColor.RED + "You don't have permission.");
 					return true;
 				}
-				
 				if(Integer.parseInt(args[1]) > 0) {
 					p.removeListItem(Integer.parseInt(args[1]));
 					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Preference " + args[1] + " has been deleted.");
-				
+					return true;
 				} else {
 					player.sendMessage(ChatColor.RED + "Command not understood." + ChatColor.YELLOW + " Usage:" + ChatColor.WHITE + " /toolswap [del/delete] [number]");
+					return true;
 				}
 				
 			//Turn ToolSwap on for specified player	
@@ -180,20 +194,24 @@ public class Commands implements CommandExecutor{
 						
 						if(p2.getSwap()){
 							player.sendMessage(ChatColor.YELLOW + "ToolSwap is already enabled for " + args[0] + ".");
+							return true;
 							
 						} else {
 							p2.setSwap(true);
 							player.sendMessage(ChatColor.GREEN + "ToolSwap has been enabled for " + args[0] + ".");
 							player2.sendMessage(ChatColor.GREEN + "ToolSwap is enabled thanks to " + player.getDisplayName() + ".");
+							return true;
 						}
 						
 					} else {
 						player.sendMessage("Player " + args[0] + " doesn't have permissions to use ToolSwap!");
-					} //Player2 permission check
+						return true;
+					}
 				
 				} else {
 					player.sendMessage("Player " + args[0] + " not found.");
-				} //Player2 null check
+					return true;
+				}
 			
 			//Turn ToolSwap off for specified player	
 			} else if(args[1].equalsIgnoreCase("off")) {
@@ -220,27 +238,32 @@ public class Commands implements CommandExecutor{
 						
 						if(!p2.getSwap()){
 							player.sendMessage(ChatColor.YELLOW + "ToolSwap is already disabled for " + args[0] + ".");
+							return true;
 							
 						} else {
 							p2.setSwap(false);
 							p2.setListening(false);
 							player.sendMessage(ChatColor.GREEN + "ToolSwap has been disabled for " + args[0] + ".");
 							player2.sendMessage(ChatColor.GREEN + "ToolSwap has been disabled by " + player.getDisplayName() + ".");
+							return true;
 						}
-						
+					
 					} else {
 						player.sendMessage("Player " + args[0] + " doesn't have permissions to use ToolSwap!");
-					} //Player2 permission check
-					
+						return true;
+					}
+				
 				} else {
 					player.sendMessage("Player " + args[0] + " not found.");
-				} //Player2 null check
+					return true;
+				}
 				
-				
+			//Command not understood (wrong number of arguments)	
 			} else {
 				player.sendMessage(ChatColor.RED + "Command not understood.");
+				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 }
