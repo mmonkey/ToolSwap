@@ -5,11 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,12 +17,8 @@ public class ToolSwap extends JavaPlugin{
 	private static Logger log = Logger.getLogger("Minecraft");
 	
 	//List of ToolSwapPlayers
-	public HashMap<String, ToolSwapPlayer> swapList = new HashMap<String, ToolSwapPlayer>();
-	
-	//Player preferences
-	public ArrayList<String> players = new ArrayList<String>();
-	public ArrayList<HashMap<String, HashMap<Material, HashMap<Material, HashMap<String, Integer>>>>> playerToolPrefs = new ArrayList<HashMap<String, HashMap<Material, HashMap<Material, HashMap<String, Integer>>>>>();
-	
+	public HashMap<UUID, ToolSwapPlayer> swapList = new HashMap<UUID, ToolSwapPlayer>();
+		
 	//Default settings' values
 	public boolean enable = false;
 	public boolean onPlayer = false;
@@ -46,15 +41,7 @@ public class ToolSwap extends JavaPlugin{
 	public final Material[] pickaxeDiamondBlocks = {Material.OBSIDIAN};
 	
 	//Materials that you may place torches on
-	public final Material[] torchBlocks = {Material.LOG, Material.WOOD, Material.WOOD_DOUBLE_STEP, Material.WOOD_STEP, Material.PUMPKIN, Material.JACK_O_LANTERN, Material.HUGE_MUSHROOM_1, Material.HUGE_MUSHROOM_2, Material.FENCE, Material.STONE, Material.COBBLESTONE, Material.COAL_ORE, Material.SANDSTONE, Material.DOUBLE_STEP, Material.STEP, Material.COBBLE_WALL, Material.BRICK, Material.MOSSY_COBBLESTONE, Material.ICE, Material.NETHERRACK, Material.NETHER_BRICK, Material.NETHER_FENCE, Material.QUARTZ_ORE, Material.QUARTZ_BLOCK, Material.CLAY_BRICK, Material.STAINED_CLAY, Material.HARD_CLAY, Material.IRON_ORE, Material.IRON_BLOCK, Material.LAPIS_ORE, Material.LAPIS_BLOCK, Material.GOLD_ORE, Material.GOLD_BLOCK, Material.REDSTONE_ORE, Material.GLOWING_REDSTONE_ORE, Material.REDSTONE_BLOCK, Material.EMERALD_ORE, Material.EMERALD_BLOCK, Material.DIAMOND_ORE, Material.DIAMOND_BLOCK, Material.OBSIDIAN, Material.WOOL, Material.LEAVES, Material.GRASS, Material.DIRT, Material.SAND, Material.GRAVEL, Material.SNOW, Material.SNOW_BLOCK, Material.CLAY, Material.SOUL_SAND, Material.MYCEL, Material.MELON_BLOCK};
-	
-	//Original material lists for each type of tool (Now loaded from config.yml file)
-	//public final Material[] axeBlocks = {Material.LOG, Material.WOOD, Material.WOOD_DOUBLE_STEP, Material.WOOD_STEP, Material.WOOD_STAIRS, Material.WORKBENCH, Material.BIRCH_WOOD_STAIRS, Material.JUNGLE_WOOD_STAIRS, Material.SPRUCE_WOOD_STAIRS, Material.LADDER, Material.RAILS, Material.ACTIVATOR_RAIL, Material.DETECTOR_RAIL, Material.POWERED_RAIL, Material.SIGN, Material.SIGN_POST, Material.PUMPKIN, Material.JACK_O_LANTERN, Material.HUGE_MUSHROOM_1, Material.HUGE_MUSHROOM_2, Material.FENCE, Material.FENCE_GATE};
-	//public final Material[] pickaxeBlocks = {Material.STONE, Material.COBBLESTONE, Material.COAL_ORE, Material.DISPENSER, Material.SANDSTONE, Material.DOUBLE_STEP, Material.STEP, Material.COBBLESTONE_STAIRS, Material.COBBLE_WALL, Material.BRICK, Material.BRICK_STAIRS, Material.FURNACE, Material.BREWING_STAND, Material.MOSSY_COBBLESTONE, Material.CAULDRON, Material.ICE, Material.NETHERRACK, Material.NETHER_BRICK, Material.NETHER_BRICK_STAIRS, Material.NETHER_FENCE, Material.ANVIL, Material.QUARTZ_ORE, Material.QUARTZ_BLOCK, Material.QUARTZ_STAIRS, Material.CLAY_BRICK, Material.STAINED_CLAY, Material.HARD_CLAY, Material.HOPPER};
-	//public final Material[] shearBlocks = {Material.WOOL, Material.LEAVES};
-	//public final Material[] shovelBlocks = {Material.GRASS, Material.DIRT, Material.SAND, Material.GRAVEL, Material.SNOW, Material.SNOW_BLOCK, Material.CLAY, Material.SOUL_SAND, Material.MYCEL};
-	//public final Material[] swordBlocks = {Material.MELON_BLOCK, Material.WEB};
-	//public final EntityType[] enemies = {EntityType.BLAZE, EntityType.CAVE_SPIDER, EntityType.CREEPER, EntityType.ENDER_DRAGON, EntityType.ENDERMAN, EntityType.GHAST, EntityType.IRON_GOLEM, EntityType.MAGMA_CUBE, EntityType.PIG_ZOMBIE, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME, EntityType.SPIDER, EntityType.WITCH, EntityType.ZOMBIE};
+	public final Material[] torchBlocks = {Material.LOG, Material.LOG_2, Material.WOOD, Material.WOOD_DOUBLE_STEP, Material.WOOD_STEP, Material.PUMPKIN, Material.JACK_O_LANTERN, Material.HUGE_MUSHROOM_1, Material.HUGE_MUSHROOM_2, Material.FENCE, Material.STONE, Material.COBBLESTONE, Material.COAL_ORE, Material.SANDSTONE, Material.DOUBLE_STEP, Material.STEP, Material.COBBLE_WALL, Material.BRICK, Material.MOSSY_COBBLESTONE, Material.ICE, Material.NETHERRACK, Material.NETHER_BRICK, Material.NETHER_FENCE, Material.QUARTZ_ORE, Material.QUARTZ_BLOCK, Material.CLAY_BRICK, Material.STAINED_CLAY, Material.HARD_CLAY, Material.IRON_ORE, Material.IRON_BLOCK, Material.LAPIS_ORE, Material.LAPIS_BLOCK, Material.GOLD_ORE, Material.GOLD_BLOCK, Material.REDSTONE_ORE, Material.GLOWING_REDSTONE_ORE, Material.REDSTONE_BLOCK, Material.EMERALD_ORE, Material.EMERALD_BLOCK, Material.DIAMOND_ORE, Material.DIAMOND_BLOCK, Material.OBSIDIAN, Material.WOOL, Material.LEAVES, Material.GRASS, Material.DIRT, Material.SAND, Material.GRAVEL, Material.SNOW, Material.SNOW_BLOCK, Material.CLAY, Material.SOUL_SAND, Material.MYCEL, Material.MELON_BLOCK};
 	
 	//ArrayLists to be populated by the config.yml file
 	public ArrayList<Material> configAxeBlocks = new ArrayList<Material>();
@@ -130,53 +117,11 @@ public class ToolSwap extends JavaPlugin{
 			}
 		}
 		
-		//Import players who have preferences
+		//Import data
 		try{
-			players = SaveLoad.load(getDataFolder().getPath() + File.separator + "players.bin");
+			swapList = SaveLoad.load(getDataFolder().getPath() + File.separator + "players.bin");
 		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		//Import preferences
-		try{
-			playerToolPrefs = SaveLoad.load(getDataFolder().getPath() + File.separator + "prefs.bin");
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		//Distribute preferences to ToolSwapPlayers
-		if(!players.isEmpty() && !playerToolPrefs.isEmpty()) {
-			
-			for(int i = 0; i < players.size(); i++) {
-				ToolSwapPlayer p = new ToolSwapPlayer(players.get(i), enable);
-				for(int j = 0; j < playerToolPrefs.size(); j++) {
-					if(playerToolPrefs.get(j).containsKey(p.getPlayer())) {
-						for(Map.Entry<Material, HashMap<Material, HashMap<String, Integer>>> blocks: playerToolPrefs.get(j).get(p.getPlayer()).entrySet()) {
-							for(Map.Entry<Material, HashMap<String, Integer>> tools: blocks.getValue().entrySet()) {
-								
-								HashMap<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
-								
-								for(Map.Entry<String, Integer> enchants: tools.getValue().entrySet()) {
-									if(!enchants.getKey().equals("NOT_ENCHANTED")) {
-										enchantments.put(Enchantment.getByName(enchants.getKey()), enchants.getValue());
-									}
-								}
-								
-								if(enchantments.isEmpty()) {
-									p.addToPreferenceList(blocks.getKey(), tools.getKey());
-								
-								} else {
-									p.addToPreferenceList(blocks.getKey(), tools.getKey(), enchantments);
-								}
-							}
-						}
-					}
-				}
-				if(!swapList.containsKey(players.get(i))) {
-					swapList.put(players.get(i), p);
-				}
-			}
-			
+			//e.printStackTrace();
 		}
 		
 		//Start metrics
@@ -192,39 +137,19 @@ public class ToolSwap extends JavaPlugin{
 	
 	public void unload() {
 		
-		//Save players to file
+		//Save data to file
 		try{
-			SaveLoad.save(players, getDataFolder().getPath() + File.separator + "players.bin");
+			SaveLoad.save(swapList, getDataFolder().getPath() + File.separator + "players.bin");
 		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		//Save preferences to file
-		try{
-			SaveLoad.save(playerToolPrefs, getDataFolder().getPath() + File.separator + "prefs.bin");
-		}catch(Exception e){
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 	} //end unload()
 	
     public void onDisable() {
-    	savePrefs();
+    	
     	unload();
     	log.info("ToolSwap has been Disabled.");
-    }
     
-    public void savePrefs() {
-    	//Clear playerToolPrefs list
-    	playerToolPrefs.clear();
-    	
-    	//Add all players preferences to list
-    	for(int i = 0; i < players.size(); i++) {
-    		if(swapList.containsKey(players.get(i))) {
-    			HashMap<String, HashMap<Material, HashMap<Material, HashMap<String, Integer>>>> preferences = new HashMap<String, HashMap<Material, HashMap<Material, HashMap<String, Integer>>>>();
-    			preferences.put(players.get(i), swapList.get(players.get(i)).getPreferences());
-    			playerToolPrefs.add(preferences);
-    		}
-    	}
-    }
+    } // end onDisable()
 }

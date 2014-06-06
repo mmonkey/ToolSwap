@@ -28,12 +28,12 @@ public class Commands implements CommandExecutor{
 		}
 		
 		//Add player to swapList if not already
-		if(!plugin.swapList.containsKey(player.getName())) {
-			plugin.swapList.put(player.getName(), new ToolSwapPlayer(player.getName(), plugin.enable));
+		if(!plugin.swapList.containsKey(player.getUniqueId())) {
+			plugin.swapList.put(player.getUniqueId(), new ToolSwapPlayer(player.getName(), player.getUniqueId(), plugin.enable));
 		}
 		
 		//Pull player out of swapList
-		ToolSwapPlayer p = plugin.swapList.get(player.getName());
+		ToolSwapPlayer p = plugin.swapList.get(player.getUniqueId());
 		
 		//If command has no arguments, show whether ToolSwap is enabled or disabled.
 		if(args.length == 0) {
@@ -138,10 +138,15 @@ public class Commands implements CommandExecutor{
 				
 				player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Your preferred tools:");
 				
-				for(int i = 0; i < p.preferenceListToString().size(); i++) {
-					player.sendMessage(p.preferenceListToString().get(i));
+				if(p.getPreferences().getPreferences().size() == 0 || p.getPreferences().getPreferences().isEmpty()) {
+					player.sendMessage(ChatColor.RED + "You have no preferred tools.");
+					player.sendMessage(ChatColor.YELLOW + "To set a preferred tool:"+ ChatColor.WHITE + " /toolswap set");
+				} else {
+					for(int i = 0; i < p.getPreferences().print().size(); i++) {
+						player.sendMessage(Integer.toString((i + 1)) + " - " + p.getPreferences().print().get(i));
+					}
 				}
-				
+					
 				return true;
 			
 			//Command not understood (invalid arguments)	
@@ -161,7 +166,7 @@ public class Commands implements CommandExecutor{
 					return true;
 				}
 				if(Integer.parseInt(args[1]) > 0) {
-					p.removeListItem(Integer.parseInt(args[1]));
+					p.getPreferences().remove(Integer.parseInt(args[1]));
 					player.sendMessage("[" + ChatColor.GREEN + "ToolSwap" + ChatColor.WHITE + "]" + ChatColor.YELLOW + " Preference " + args[1] + " has been deleted.");
 					return true;
 				} else {
@@ -178,6 +183,7 @@ public class Commands implements CommandExecutor{
 					return true;
 				}
 				
+				@SuppressWarnings("deprecation")
 				Player player2 = plugin.getServer().getPlayer(args[0]);
 				
 				if(player2 != null) {
@@ -185,12 +191,12 @@ public class Commands implements CommandExecutor{
 					if(player2.hasPermission("toolswap.use")) {
 						
 						//Add player to swapList if not already
-						if(!plugin.swapList.containsKey(player2.getName())) {
-							plugin.swapList.put(player2.getName(), new ToolSwapPlayer(player2.getName(), plugin.enable));
+						if(!plugin.swapList.containsKey(player2.getUniqueId())) {
+							plugin.swapList.put(player2.getUniqueId(), new ToolSwapPlayer(player2.getName(), player2.getUniqueId(), plugin.enable));
 						}
 						
 						//Pull player out of swapList
-						ToolSwapPlayer p2 = plugin.swapList.get(player2.getName());
+						ToolSwapPlayer p2 = plugin.swapList.get(player2.getUniqueId());
 						
 						if(p2.getSwap()){
 							player.sendMessage(ChatColor.YELLOW + "ToolSwap is already enabled for " + args[0] + ".");
@@ -222,6 +228,7 @@ public class Commands implements CommandExecutor{
 					return true;
 				}
 				
+				@SuppressWarnings("deprecation")
 				Player player2 = plugin.getServer().getPlayer(args[0]);
 				
 				if(player2 != null){
@@ -229,12 +236,12 @@ public class Commands implements CommandExecutor{
 					if(player2.hasPermission("toolswap.use")) {
 						
 						//Add player to swapList if not already
-						if(!plugin.swapList.containsKey(player2.getName())) {
-							plugin.swapList.put(player2.getName(), new ToolSwapPlayer(player2.getName(), plugin.enable));
+						if(!plugin.swapList.containsKey(player2.getUniqueId())) {
+							plugin.swapList.put(player2.getUniqueId(), new ToolSwapPlayer(player2.getName(), player2.getUniqueId(), plugin.enable));
 						}
 						
 						//Pull player out of swapList
-						ToolSwapPlayer p2 = plugin.swapList.get(player2.getName());
+						ToolSwapPlayer p2 = plugin.swapList.get(player2.getUniqueId());
 						
 						if(!p2.getSwap()){
 							player.sendMessage(ChatColor.YELLOW + "ToolSwap is already disabled for " + args[0] + ".");
