@@ -1,6 +1,6 @@
 name: ToolSwap
 main: com.gmail.mmonkey.ToolSwap.ToolSwap
-version: 1.4
+version: 1.4.1
 commands:
    toolswap:
       description: Automatically switch tools, from your inventory, to your hand depending on what you are mining/fighting. If you have torches in your inventory, and a pickaxe or shovel in hand, right click to automatically switch to torches.

@@ -322,9 +322,9 @@ public class UseTool implements Listener {
 			
 			if(player.hasPermission("toolswap.use")) {
 			
-				if(plugin.swapList.containsKey(player.getName())){
+				if(plugin.swapList.containsKey(player.getUniqueId())){
 					
-					ToolSwapPlayer p = plugin.swapList.get(player.getName());
+					ToolSwapPlayer p = plugin.swapList.get(player.getUniqueId());
 					
 					if(p.getSwap()){
 						
